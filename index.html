@@ -1,40 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Study Sprint Tracker</title>
-  <link rel="stylesheet" href="style.css"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
 
   <div class="container">
+
     <h1>🎯 Study Sprint Tracker</h1>
 
+
+    <!-- TASK INPUT -->
+
     <div class="input-section">
-      <input type="text" id="taskInput" placeholder="Enter study task">
-      <button onclick="addTask()">Add</button>
+
+      <input type="text"
+        id="taskInput"
+        placeholder="Enter study task">
+
+      <button onclick="addTask()">
+        Add
+      </button>
+
     </div>
+
+
+    <!-- TASK LIST -->
 
     <ul id="taskList"></ul>
 
+
+    <!-- COMPLETED TASKS -->
+
     <div class="progress">
-      Completed Tasks: <span id="count">0</span>
+
+      Completed Tasks:
+      <span id="count">0</span>
+
     </div>
+
+
+    <!-- TIMER -->
 
     <div class="timer">
+
       <h2>⏳ Focus Timer</h2>
-      <input type="number" id="minutesInput" placeholder="Enter minutes">
 
-<p id="time">25:00</p>
-
-<button onclick="startTimer()">Start Timer</button>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
-</body>
-</html>
+      <input
