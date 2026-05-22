@@ -36,7 +36,7 @@ function deleteTask(button) {
   li.remove();
 }
 
-let timeLeft = 1500;
+let timeLeft;
 let timerRunning = false;
 
 function startTimer() {
