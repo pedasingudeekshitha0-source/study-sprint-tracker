@@ -1,80 +1,154 @@
 let completedCount = 0;
 
-let timeLeft;
-let timerRunning = false;
+let totalTasks = 0;
+
+let streak = localStorage.getItem("streak") || 0;
+
+document.getElementById("streak").innerText = streak;
+
+let quotes = [
+
+  "Discipline beats motivation.",
+
+  "Small progress is still progress.",
+
+  "Focus on consistency.",
+
+  "Your future is built today."
+
+];
+
+document.getElementById("quote").innerText =
+
+quotes[Math.floor(Math.random() * quotes.length)];
 
 
-// ADD TASK
-function addTask() {
 
-  const input = document.getElementById("taskInput");
+function addTask(){
+
+  const input =
+    document.getElementById("taskInput");
+
+  const category =
+    document.getElementById("category").value;
 
   const taskText = input.value;
 
-  if (taskText === "") return;
+  if(taskText === "") return;
 
-  const li = document.createElement("li");
+  totalTasks++;
+
+  const li =
+    document.createElement("li");
 
   li.innerHTML = `
-  
-    <span>${taskText}</span>
 
     <div>
 
-      <button onclick="completeTask(this)">✔</button>
+      <strong>[${category}]</strong>
 
-      <button onclick="deleteTask(this)">❌</button>
+      ${taskText}
 
     </div>
-  
+
+    <div>
+
+      <button onclick="completeTask(this)">
+      ✔
+      </button>
+
+      <button onclick="deleteTask(this)">
+      ❌
+      </button>
+
+    </div>
+
   `;
 
-  document.getElementById("taskList").appendChild(li);
+  document
+    .getElementById("taskList")
+    .appendChild(li);
+
+  saveTasks();
 
   input.value = "";
 
 }
 
 
-// COMPLETE TASK
-function completeTask(button) {
 
-  const li = button.parentElement.parentElement;
+function completeTask(button){
 
-  if (!li.classList.contains("completed")) {
+  const li =
+    button.parentElement.parentElement;
+
+  if(!li.classList.contains("completed")){
 
     li.classList.add("completed");
 
     completedCount++;
 
-    document.getElementById("count").innerText = completedCount;
+    document.getElementById("count")
+      .innerText = completedCount;
+
+    updateProgress();
+
+    streak++;
+
+    document.getElementById("streak")
+      .innerText = streak;
+
+    localStorage.setItem("streak", streak);
+
+    saveTasks();
 
   }
 
 }
 
 
-// DELETE TASK
-function deleteTask(button) {
 
-  const li = button.parentElement.parentElement;
+function deleteTask(button){
+
+  const li =
+    button.parentElement.parentElement;
 
   li.remove();
+
+  saveTasks();
 
 }
 
 
-// START TIMER
-function startTimer() {
 
-  if (timerRunning) return;
+function updateProgress(){
+
+  let percent =
+    (completedCount / totalTasks) * 100;
+
+  document.getElementById("progressFill")
+    .style.width = percent + "%";
+
+}
+
+
+
+let timerRunning = false;
+
+let timeLeft;
+
+
+
+function startTimer(){
+
+  if(timerRunning) return;
 
   const minutes =
     document.getElementById("minutesInput").value;
 
-  if (minutes === "" || minutes <= 0) {
+  if(minutes === "" || minutes <= 0){
 
-    alert("Please enter valid minutes");
+    alert("Enter valid minutes");
 
     return;
 
@@ -84,20 +158,23 @@ function startTimer() {
 
   timerRunning = true;
 
-  const timer = setInterval(() => {
+  const timer = setInterval(()=>{
 
-    let mins = Math.floor(timeLeft / 60);
+    let mins =
+      Math.floor(timeLeft / 60);
 
-    let secs = timeLeft % 60;
+    let secs =
+      timeLeft % 60;
 
-    secs = secs < 10 ? "0" + secs : secs;
+    secs =
+      secs < 10 ? "0"+secs : secs;
 
-    document.getElementById("time").innerText =
-      `${mins}:${secs}`;
+    document.getElementById("time")
+      .innerText = `${mins}:${secs}`;
 
     timeLeft--;
 
-    if (timeLeft < 0) {
+    if(timeLeft < 0){
 
       clearInterval(timer);
 
@@ -107,6 +184,39 @@ function startTimer() {
 
     }
 
-  }, 1000);
+  },1000);
+
+}
+
+
+
+function toggleTheme(){
+
+  document.body.classList.toggle("light-mode");
+
+}
+
+
+
+function saveTasks(){
+
+  localStorage.setItem(
+
+    "tasks",
+
+    document.getElementById("taskList").innerHTML
+
+  );
+
+}
+
+
+
+window.onload = function(){
+
+  document.getElementById("taskList")
+    .innerHTML =
+
+    localStorage.getItem("tasks") || "";
 
 }
