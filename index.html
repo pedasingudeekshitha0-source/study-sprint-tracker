@@ -5,17 +5,23 @@
 
   <meta charset="UTF-8">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
 
   <title>Study Sprint Tracker</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect"
+    href="https://fonts.googleapis.com">
 
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin>
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet"
+    href="style.css">
 
 </head>
 
@@ -23,10 +29,14 @@
 
   <div class="container">
 
+    <button class="toggle-btn"
+      onclick="toggleTheme()">
+      🌙
+    </button>
+
     <h1>🎯 Study Sprint Tracker</h1>
 
-
-    <!-- TASK INPUT -->
+    <p id="quote"></p>
 
     <div class="input-section">
 
@@ -34,29 +44,47 @@
         id="taskInput"
         placeholder="Enter study task">
 
+      <select id="category">
+
+        <option>Java</option>
+
+        <option>Python</option>
+
+        <option>Aptitude</option>
+
+        <option>Placement Prep</option>
+
+      </select>
+
       <button onclick="addTask()">
         Add
       </button>
 
     </div>
 
-
-    <!-- TASK LIST -->
-
     <ul id="taskList"></ul>
-
-
-    <!-- COMPLETED TASKS -->
 
     <div class="progress">
 
-      Completed Tasks:
-      <span id="count">0</span>
+      <p>
+        Completed Tasks:
+        <span id="count">0</span>
+      </p>
+
+      <div class="progress-bar">
+
+        <div id="progressFill"></div>
+
+      </div>
 
     </div>
 
+    <div class="streak">
 
-    <!-- TIMER -->
+      🔥 Streak:
+      <span id="streak">0</span>
+
+    </div>
 
     <div class="timer">
 
