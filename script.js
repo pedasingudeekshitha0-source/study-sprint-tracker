@@ -1,7 +1,14 @@
 let completedCount = 0;
 
+let timeLeft;
+let timerRunning = false;
+
+
+// ADD TASK
 function addTask() {
+
   const input = document.getElementById("taskInput");
+
   const taskText = input.value;
 
   if (taskText === "") return;
@@ -9,52 +16,68 @@ function addTask() {
   const li = document.createElement("li");
 
   li.innerHTML = `
+  
     <span>${taskText}</span>
+
     <div>
+
       <button onclick="completeTask(this)">✔</button>
+
       <button onclick="deleteTask(this)">❌</button>
+
     </div>
+  
   `;
 
   document.getElementById("taskList").appendChild(li);
 
   input.value = "";
+
 }
 
+
+// COMPLETE TASK
 function completeTask(button) {
+
   const li = button.parentElement.parentElement;
 
   if (!li.classList.contains("completed")) {
+
     li.classList.add("completed");
+
     completedCount++;
+
     document.getElementById("count").innerText = completedCount;
+
   }
+
 }
 
+
+// DELETE TASK
 function deleteTask(button) {
+
   const li = button.parentElement.parentElement;
+
   li.remove();
+
 }
 
-let timeLeft;
-let timerRunning = false;
 
-function startTimer() {
-  let completedCount = 0;
-
-let timeLeft;
-
-let timerRunning = false;
-
+// START TIMER
 function startTimer() {
 
   if (timerRunning) return;
 
-  const minutes = document.getElementById("minutesInput").value;
+  const minutes =
+    document.getElementById("minutesInput").value;
 
   if (minutes === "" || minutes <= 0) {
+
     alert("Please enter valid minutes");
+
     return;
+
   }
 
   timeLeft = minutes * 60;
@@ -64,6 +87,7 @@ function startTimer() {
   const timer = setInterval(() => {
 
     let mins = Math.floor(timeLeft / 60);
+
     let secs = timeLeft % 60;
 
     secs = secs < 10 ? "0" + secs : secs;
