@@ -2,9 +2,15 @@ let completedCount = 0;
 
 let totalTasks = 0;
 
-let streak = localStorage.getItem("streak") || 0;
+let streak =
+localStorage.getItem("streak") || 0;
 
-document.getElementById("streak").innerText = streak;
+document.getElementById("streak")
+.innerText = streak;
+
+
+
+// MOTIVATIONAL QUOTES
 
 let quotes = [
 
@@ -14,32 +20,41 @@ let quotes = [
 
   "Focus on consistency.",
 
-  "Your future is built today."
+  "Success starts with daily effort."
 
 ];
 
-document.getElementById("quote").innerText =
+document.getElementById("quote")
+.innerText =
 
-quotes[Math.floor(Math.random() * quotes.length)];
+quotes[
+  Math.floor(
+    Math.random() * quotes.length
+  )
+];
 
 
+
+
+// ADD TASK
 
 function addTask(){
 
   const input =
-    document.getElementById("taskInput");
+  document.getElementById("taskInput");
 
   const category =
-    document.getElementById("category").value;
+  document.getElementById("category").value;
 
-  const taskText = input.value;
+  const taskText =
+  input.value;
 
   if(taskText === "") return;
 
   totalTasks++;
 
   const li =
-    document.createElement("li");
+  document.createElement("li");
 
   li.innerHTML = `
 
@@ -66,8 +81,8 @@ function addTask(){
   `;
 
   document
-    .getElementById("taskList")
-    .appendChild(li);
+  .getElementById("taskList")
+  .appendChild(li);
 
   saveTasks();
 
@@ -77,10 +92,12 @@ function addTask(){
 
 
 
+// COMPLETE TASK
+
 function completeTask(button){
 
   const li =
-    button.parentElement.parentElement;
+  button.parentElement.parentElement;
 
   if(!li.classList.contains("completed")){
 
@@ -89,16 +106,19 @@ function completeTask(button){
     completedCount++;
 
     document.getElementById("count")
-      .innerText = completedCount;
+    .innerText = completedCount;
 
     updateProgress();
 
     streak++;
 
     document.getElementById("streak")
-      .innerText = streak;
+    .innerText = streak;
 
-    localStorage.setItem("streak", streak);
+    localStorage.setItem(
+      "streak",
+      streak
+    );
 
     saveTasks();
 
@@ -108,10 +128,12 @@ function completeTask(button){
 
 
 
+// DELETE TASK
+
 function deleteTask(button){
 
   const li =
-    button.parentElement.parentElement;
+  button.parentElement.parentElement;
 
   li.remove();
 
@@ -121,17 +143,38 @@ function deleteTask(button){
 
 
 
+// PROGRESS BAR
+
 function updateProgress(){
 
-  let percent =
-    (completedCount / totalTasks) * 100;
+  let percent = 0;
 
-  document.getElementById("progressFill")
-    .style.width = percent + "%";
+  if(totalTasks > 0){
+
+    percent = Math.round(
+
+      (completedCount / totalTasks) * 100
+
+    );
+
+  }
+
+  document
+  .getElementById("progressFill")
+  .style.width = percent + "%";
+
+  document
+  .getElementById("progressText")
+  .innerText =
+
+  percent + "% Completed";
 
 }
 
 
+
+
+// TIMER
 
 let timerRunning = false;
 
@@ -144,7 +187,10 @@ function startTimer(){
   if(timerRunning) return;
 
   const minutes =
-    document.getElementById("minutesInput").value;
+
+  document.getElementById(
+    "minutesInput"
+  ).value;
 
   if(minutes === "" || minutes <= 0){
 
@@ -161,16 +207,18 @@ function startTimer(){
   const timer = setInterval(()=>{
 
     let mins =
-      Math.floor(timeLeft / 60);
+    Math.floor(timeLeft / 60);
 
     let secs =
-      timeLeft % 60;
+    timeLeft % 60;
 
     secs =
-      secs < 10 ? "0"+secs : secs;
+    secs < 10 ? "0"+secs : secs;
 
     document.getElementById("time")
-      .innerText = `${mins}:${secs}`;
+    .innerText =
+
+    `${mins}:${secs}`;
 
     timeLeft--;
 
@@ -190,13 +238,18 @@ function startTimer(){
 
 
 
+// DARK / LIGHT MODE
+
 function toggleTheme(){
 
-  document.body.classList.toggle("light-mode");
+  document.body
+  .classList.toggle("light-mode");
 
 }
 
 
+
+// SAVE TASKS
 
 function saveTasks(){
 
@@ -204,7 +257,8 @@ function saveTasks(){
 
     "tasks",
 
-    document.getElementById("taskList").innerHTML
+    document.getElementById("taskList")
+    .innerHTML
 
   );
 
@@ -212,11 +266,13 @@ function saveTasks(){
 
 
 
+// LOAD TASKS
+
 window.onload = function(){
 
   document.getElementById("taskList")
-    .innerHTML =
+  .innerHTML =
 
-    localStorage.getItem("tasks") || "";
+  localStorage.getItem("tasks") || "";
 
-}
+    }
