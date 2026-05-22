@@ -40,25 +40,49 @@ let timeLeft;
 let timerRunning = false;
 
 function startTimer() {
+  let completedCount = 0;
+
+let timeLeft;
+
+let timerRunning = false;
+
+function startTimer() {
+
   if (timerRunning) return;
+
+  const minutes = document.getElementById("minutesInput").value;
+
+  if (minutes === "" || minutes <= 0) {
+    alert("Please enter valid minutes");
+    return;
+  }
+
+  timeLeft = minutes * 60;
 
   timerRunning = true;
 
   const timer = setInterval(() => {
-    let minutes = Math.floor(timeLeft / 60);
-    let seconds = timeLeft % 60;
 
-    seconds = seconds < 10 ? "0" + seconds : seconds;
+    let mins = Math.floor(timeLeft / 60);
+    let secs = timeLeft % 60;
+
+    secs = secs < 10 ? "0" + secs : secs;
 
     document.getElementById("time").innerText =
-      `${minutes}:${seconds}`;
+      `${mins}:${secs}`;
 
     timeLeft--;
 
     if (timeLeft < 0) {
+
       clearInterval(timer);
+
       timerRunning = false;
+
       alert("Focus Session Completed!");
+
     }
+
   }, 1000);
+
 }
