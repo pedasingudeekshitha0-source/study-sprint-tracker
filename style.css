@@ -62,3 +62,11 @@ li {
 #time {
   font-size: 30px;
 }
+#minutesInput {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: none;
+  text-align: center;
+}
