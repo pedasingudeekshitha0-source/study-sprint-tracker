@@ -56,3 +56,6 @@ Mobile application support
 👩‍💻 Author
 Deekshitha Pedasingu
 GitHub: https://github.com/pedasingudeekshitha0-source⁠�
+## Recent Update
+
+- Improved README documentation on June 2026
